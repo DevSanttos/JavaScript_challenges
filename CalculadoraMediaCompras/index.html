@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Calculadora de compras</title>
+</head>
+<body>
+    <header>
+        <h1>Mercado Rezende's</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Menu</a></li>
+            </ul>
+            <form>
+                <input type="text" placeholder="Pesquisar...">
+                <button type="submit" id="btnBuscar">Buscar</button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        <section class="produtos">
+            <div id="produtos-header">
+                <h2>Nossos produtos</h2>
+                <div id="addProdutos">
+                    <label for="btnAdicionarProdutos">Adicionar produtos ao cardápio</label>
+                    <button id="btnAdicionarProdutos">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="card_container">
+                <article class="card_produto">
+                    <h3 id="nomeProdutoCard">Teste</h3>
+                    <img src="./assets/images/7081401_3548737-removebg-preview.png" alt="Smartphone" id="imagemProdutoCard">
+                    <p id="descricaoCard">descrição de exemplo</p>
+                    <p>Preço: <span id="valorProdutoCard">R$ 899,00</span></p>
+                    <div class="addRemove">
+                        <button class="btnRemover">-</button>
+                            <p id="quantidadeProdutoCard">1</p>
+                        <button class="btnAdicionar">+</button>
+                    </div>
+                    <button id="btnAdicionarAoCarrinho">Adicionar ao Carrinho</button>
+                </article>
+            </div>
+        </section>
+
+        <aside class="carrinho">
+            <h2>Carrinho de Compras</h2>
+            <ul class="listaCarrinho">
+                <div class="itemCarrinho">
+                    <li>Produto1 - R$ <span id="valorProdutoCarrinho">30,00</span></li>
+                    <div class="addRemoveCarrinho">
+                        <button class="btnRemover">-</button>
+                            <p id="quantidadeProduto">1</p>
+                        <button class="btnAdicionar">+</button>
+                    </div>
+                </div>
+            </ul>
+            <p>Total: R$ <span id="valorTotalCarrinho">30,00</span></p>
+            <button>Finalizar Compra</button>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Jonathan Rezende dos Santos</p>
+    </footer>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
