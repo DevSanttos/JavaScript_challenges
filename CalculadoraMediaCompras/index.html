@@ -34,15 +34,55 @@
                 </div>
             </div>
 
+            <div id="modal">
+                <div class="modalContent">
+                    <div class="modal-header">
+                        <h2>Adicionar Produto</h2>
+                        <button type="button" id="closeModalBtn" class="btn-close">&times;</button>
+                    </div>
+                    
+                    <form class="modal-form">
+                        <div class="form-group">
+                            <div class="label-grup">
+                                <label for="nomeProduto">Nome do Produto:</label>
+                                <p class="alertaCampoInvalido">Nome inválido!</p>
+                            </div>
+                            <input type="text" id="nomeProduto" placeholder="Digite o nome do produto" required>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="label-grup">
+                                <label for="descricaoProduto">Descrição do Produto:</label>
+                                <p class="alertaCampoInvalido">Descrição inválida!</p>
+                            </div>
+                            <input type="text" id="descricaoProduto" placeholder="Digite a descrição do produto" required>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="label-grup">
+                                <label for="valorProduto">Valor do Produto:</label>
+                                <p class="alertaCampoInvalido">Valor inválido!</p>
+                            </div>
+                            <input type="number" id="valorProduto" placeholder="0.00" min="0" step="0.01" required>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" id="btnCancelar" class="btn-secondary">Cancelar</button>
+                            <button type="submit" id="btnAdicionarProdutoAoEstoque" class="btn-primary">Adicionar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <div class="card_container">
                 <article class="card_produto">
                     <h3 id="nomeProdutoCard">Teste</h3>
-                    <img src="./assets/images/7081401_3548737-removebg-preview.png" alt="Smartphone" id="imagemProdutoCard">
+                    <img src="./assets/images/7081401_3548737-removebg-preview.png" alt="ImgProduto" id="imagemProdutoCard">
                     <p id="descricaoCard">descrição de exemplo</p>
-                    <p>Preço: <span id="valorProdutoCard">R$ 899,00</span></p>
+                    <p>Preço: R$ <span id="valorProdutoCard">25,50</span></p>
                     <div class="addRemove">
                         <button class="btnRemover">-</button>
-                            <p id="quantidadeProdutoCard">1</p>
+                            <p class="quantidadeProdutoCard">1</p>
                         <button class="btnAdicionar">+</button>
                     </div>
                     <button id="btnAdicionarAoCarrinho">Adicionar ao Carrinho</button>
