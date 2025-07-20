@@ -1,6 +1,8 @@
 // Executar quando a página carregar
 
 document.addEventListener("DOMContentLoaded", () => {
+  atualizarValorTotalCarrinho();
+
   const btnAdicionarProdutos = document.getElementById("btnAdicionarProdutos");
   btnAdicionarProdutos.addEventListener("click", abrirModal);
 
@@ -27,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
     
-    
   cardContainer.addEventListener("click", (event) => {
     if (event.target.id === "btnAdicionarAoCarrinho") {
       adicionarAoCarrinho(event.target);
@@ -43,6 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
       adicionarProdutosAoCarrinhoCompras(event.target);
     }
   });
+
+  const btnFinalizarCompra = document.getElementById("btnFinalizarCompra");
+  btnFinalizarCompra.addEventListener("click", finalizarCompra);
+
+  const btnFecharModalFinalizarCompra = document.getElementById("closeModalFinalizarBtn");
+  const btnOkFecharMModal = document.getElementById("btnFecharModalCompra");
+
+  btnFecharModalFinalizarCompra.addEventListener("click", fecharModalFinalizarCompra);
+  btnOkFecharMModal.addEventListener("click", fecharModalFinalizarCompra);
+
+
+
 });
 
 function abrirModal() {
@@ -146,6 +159,7 @@ function removerProdutosCarrinhoCompras(botao) {
     if (quantidade == 1) {
       const itemCarrinho = botao.closest(".itemCarrinho");
       itemCarrinho.remove();
+      atualizarValorTotalCarrinho();
     } else {
       quantidade--;
       quantidadeProdutoCard.textContent = quantidade;
@@ -157,6 +171,7 @@ function removerProdutosCarrinhoCompras(botao) {
       const valorUnitario = valorTotalAtual / (quantidade + 1);
       const novoValorTotal = (valorTotalAtual - valorUnitario).toFixed(2).replace('.', ',');
       liProduto.textContent = `${nomeProduto} - R$ ${novoValorTotal}`;
+      atualizarValorTotalCarrinho();
     }
   }
 }
@@ -176,9 +191,9 @@ function adicionarProdutosAoCarrinhoCompras(botao) {
 
     const novoValorTotal = (valorUnitario * quantidade).toFixed(2).replace('.', ',');
     liProduto.textContent = `${nomeProduto} - R$ ${novoValorTotal}`;
+    atualizarValorTotalCarrinho();
   }
 }
-
 
 function adicionarAoCarrinho(botao) {
   const cardProduto = botao.closest('.card_produto');
@@ -209,6 +224,7 @@ function adicionarAoCarrinho(botao) {
     
     produtoExistente.querySelector('p').textContent = novaQuantidade;
     produtoExistente.querySelector('li').textContent = `${nomeProduto} - R$ ${novoValorTotal}`;
+    atualizarValorTotalCarrinho();
   } else {
     const itemCarrinho = document.createElement("div");
     itemCarrinho.classList.add("itemCarrinho");
@@ -225,7 +241,57 @@ function adicionarAoCarrinho(botao) {
     `;
     listaCarrinho.appendChild(itemCarrinho);
   }
+  atualizarValorTotalCarrinho();
   cardProduto.querySelector(".quantidadeProdutoCard").textContent = "1";
 }
 
-function finalizarCompra() {}
+function atualizarValorTotalCarrinho() {
+  const listaCarrinho = document.querySelector(".listaCarrinho");
+  const itensCarrinho = listaCarrinho.querySelectorAll('.itemCarrinho li');
+  let valorTotal = 0;
+
+  itensCarrinho.forEach(item => {
+    const valorTexto = item.textContent.split(' - R$ ')[1].replace(',', '.');
+    const valorNumerico = parseFloat(valorTexto);
+    valorTotal += valorNumerico;
+  });
+  const valorTotalElement = document.getElementById("valorTotalCarrinho");
+  if (valorTotalElement) {
+    valorTotalElement.textContent = `${valorTotal.toFixed(2).replace('.', ',')}`;
+  }
+}
+
+function abrirModalFinalizarCompra() {
+  const modal = document.getElementById("modalFinalizarCompra");
+  if (modal) {
+    modal.style.display = "flex";
+  }
+}
+
+function fecharModalFinalizarCompra() {
+  const modal = document.getElementById("modalFinalizarCompra");
+  if (modal) {
+    modal.style.display = "none";
+  }
+  const listaCarrinho = document.querySelector(".listaCarrinho");
+  const itensCarrinho = listaCarrinho.querySelectorAll('.itemCarrinho');
+
+  itensCarrinho.forEach(itensCarrinho => {
+    itensCarrinho.remove();
+    atualizarValorTotalCarrinho();
+  });
+}
+
+function finalizarCompra() {
+  const valorTotal = document.getElementById("valorTotalCarrinho").textContent;
+  const valorNumericoTotal = parseFloat(valorTotal.replace('R$ ', '').replace(',', '.'));
+
+  const valorTotalFinalizado = document.getElementById("valorTotalFinalizado");
+  
+  if(valorNumericoTotal > 0) {
+    valorTotalFinalizado.textContent = valorTotal;
+    abrirModalFinalizarCompra();
+  } else {
+    return;
+  }
+}

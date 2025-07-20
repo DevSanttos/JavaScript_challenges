@@ -29,12 +29,12 @@
             <div id="produtos-header">
                 <h2>Nossos produtos</h2>
                 <div id="addProdutos">
-                    <label for="btnAdicionarProdutos">Adicionar produtos ao cardápio</label>
+                    <label for="btnAdicionarProdutos">Adicionar produtos ao catálogo</label>
                     <button id="btnAdicionarProdutos">Adicionar</button>
                 </div>
             </div>
 
-            <div id="modal">
+            <div id="modal" class="modal">
                 <div class="modalContent">
                     <div class="modal-header">
                         <h2>Adicionar Produto</h2>
@@ -76,10 +76,36 @@
 
             <div class="card_container">
                 <article class="card_produto">
-                    <h3 id="nomeProdutoCard">Teste</h3>
+                    <h3 id="nomeProdutoCard">Arroz</h3>
                     <img src="./assets/images/7081401_3548737-removebg-preview.png" alt="ImgProduto" id="imagemProdutoCard">
-                    <p id="descricaoCard">descrição de exemplo</p>
-                    <p>Preço: R$ <span id="valorProdutoCard">25,50</span></p>
+                    <p id="descricaoCard">Arroz branco</p>
+                    <p>Preço: R$ <span id="valorProdutoCard">23,50</span></p>
+                    <div class="addRemove">
+                        <button class="btnRemover">-</button>
+                            <p class="quantidadeProdutoCard">1</p>
+                            <button class="btnAdicionar">+</button>
+                        </div>
+                        <button id="btnAdicionarAoCarrinho">Adicionar ao Carrinho</button>
+                    </article>
+                    
+                    <article class="card_produto">
+                        <h3 id="nomeProdutoCard">Café 500g</h3>
+                        <img src="./assets/images/7081401_3548737-removebg-preview.png" alt="ImgProduto" id="imagemProdutoCard">
+                        <p id="descricaoCard">Café torrado e moído</p>
+                        <p>Preço: R$ <span id="valorProdutoCard">55,50</span></p>
+                        <div class="addRemove">
+                            <button class="btnRemover">-</button>
+                                <p class="quantidadeProdutoCard">1</p>
+                            <button class="btnAdicionar">+</button>
+                        </div>
+                        <button id="btnAdicionarAoCarrinho">Adicionar ao Carrinho</button>
+                    </article>
+
+                    <article class="card_produto">
+                        <h3 id="nomeProdutoCard">Suco de uva</h3>
+                        <img src="./assets/images/7081401_3548737-removebg-preview.png" alt="ImgProduto" id="imagemProdutoCard">
+                        <p id="descricaoCard">Suco de uva integral</p>
+                        <p>Preço: R$ <span id="valorProdutoCard">13,00</span></p>
                     <div class="addRemove">
                         <button class="btnRemover">-</button>
                             <p class="quantidadeProdutoCard">1</p>
@@ -87,23 +113,78 @@
                     </div>
                     <button id="btnAdicionarAoCarrinho">Adicionar ao Carrinho</button>
                 </article>
+
+                <article class="card_produto">
+                    <h3 id="nomeProdutoCard">Feijão</h3>
+                    <img src="./assets/images/7081401_3548737-removebg-preview.png" alt="ImgProduto" id="imagemProdutoCard">
+                    <p id="descricaoCard">Feijão preto</p>
+                    <p>Preço: R$ <span id="valorProdutoCard">5,50</span></p>
+                    <div class="addRemove">
+                        <button class="btnRemover">-</button>
+                            <p class="quantidadeProdutoCard">1</p>
+                        <button class="btnAdicionar">+</button>
+                    </div>
+                    <button id="btnAdicionarAoCarrinho">Adicionar ao Carrinho</button>
+                </article>
+
+                <article class="card_produto">
+                    <h3 id="nomeProdutoCard">Chocolate</h3>
+                    <img src="./assets/images/7081401_3548737-removebg-preview.png" alt="ImgProduto" id="imagemProdutoCard">
+                    <p id="descricaoCard">Chocolate ao leite</p>
+                    <p>Preço: R$ <span id="valorProdutoCard">12,00</span></p>
+                    <div class="addRemove">
+                        <button class="btnRemover">-</button>
+                            <p class="quantidadeProdutoCard">1</p>
+                        <button class="btnAdicionar">+</button>
+                    </div>
+                    <button id="btnAdicionarAoCarrinho">Adicionar ao Carrinho</button>
+                </article>
+
+                <article class="card_produto">
+                    <h3 id="nomeProdutoCard">Leite</h3>
+                    <img src="./assets/images/7081401_3548737-removebg-preview.png" alt="ImgProduto" id="imagemProdutoCard">
+                    <p id="descricaoCard">Leite integral</p>
+                    <p>Preço: R$ <span id="valorProdutoCard">3,50</span></p>
+                    <div class="addRemove">
+                        <button class="btnRemover">-</button>
+                            <p class="quantidadeProdutoCard">1</p>
+                        <button class="btnAdicionar">+</button>
+                    </div>
+                    <button id="btnAdicionarAoCarrinho">Adicionar ao Carrinho</button>
+                </article>
+                
             </div>
         </section>
 
         <aside class="carrinho">
             <h2>Carrinho de Compras</h2>
-            <ul class="listaCarrinho">
-                <div class="itemCarrinho">
-                    <li>Produto1 - R$ <span id="valorProdutoCarrinho">30,00</span></li>
-                    <div class="addRemoveCarrinho">
-                        <button class="btnRemover">-</button>
-                            <p id="quantidadeProduto">1</p>
-                        <button class="btnAdicionar">+</button>
+            <ul class="listaCarrinho"></ul>
+            <p>Total: R$ <span id="valorTotalCarrinho"></span></p>
+            <button id="btnFinalizarCompra">Finalizar Compra</button>
+
+            <div id="modalFinalizarCompra" class="modal">
+                <div class="modalContent">
+                    <div class="modal-header">
+                        <h2>Compra Finalizada!</h2>
+                        <button type="button" id="closeModalFinalizarBtn" class="btn-close">&times;</button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="sucesso-icon">
+                            <span>✓</span>
+                        </div>
+                        <p class="mensagem-sucesso">Obrigado por comprar conosco!</p>
+                        <div class="detalhes-compra">
+                            <p class="valor-total">Valor total: R$ <span id="valorTotalFinalizado">0,00</span></p>
+                        </div>
+                        <p class="mensagem-despedida">Volte sempre!</p>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="btnFecharModalCompra" class="btn-primary">OK</button>
                     </div>
                 </div>
-            </ul>
-            <p>Total: R$ <span id="valorTotalCarrinho">30,00</span></p>
-            <button>Finalizar Compra</button>
+            </div>
         </aside>
     </main>
 
