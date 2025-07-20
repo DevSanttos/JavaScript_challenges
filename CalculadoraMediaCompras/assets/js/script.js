@@ -140,8 +140,8 @@ function adicionarProdutosAoCarrinhoCard(botao) {
 
 function removerProdutosCarrinhoCompras(botao) {
   const quantidadeProdutoCard = botao.nextElementSibling;
-
-  if (quantidadeProdutoCard) {
+  const liProduto = botao.closest(".itemCarrinho").querySelector('li');
+  if (quantidadeProdutoCard && liProduto) {
     let quantidade = parseInt(quantidadeProdutoCard.textContent);
     if (quantidade == 1) {
       const itemCarrinho = botao.closest(".itemCarrinho");
@@ -149,12 +149,34 @@ function removerProdutosCarrinhoCompras(botao) {
     } else {
       quantidade--;
       quantidadeProdutoCard.textContent = quantidade;
+
+      const textoLi = liProduto.textContent;
+      const nomeProduto = textoLi.split(' - R$')[0];
+
+      const valorTotalAtual = parseFloat(textoLi.split(' - R$ ')[1].replace(',', '.'));
+      const valorUnitario = valorTotalAtual / (quantidade + 1);
+      const novoValorTotal = (valorTotalAtual - valorUnitario).toFixed(2).replace('.', ',');
+      liProduto.textContent = `${nomeProduto} - R$ ${novoValorTotal}`;
     }
   }
 }
 
 function adicionarProdutosAoCarrinhoCompras(botao) {
-    
+  const quantidadeProdutoCard = botao.previousElementSibling;
+  const liProduto = botao.closest(".itemCarrinho").querySelector('li');
+  if (quantidadeProdutoCard && liProduto) {
+    let quantidade = parseInt(quantidadeProdutoCard.textContent);
+    quantidade++;
+    quantidadeProdutoCard.textContent = quantidade;
+
+    const textoLi = liProduto.textContent;
+    const nomeProduto = textoLi.split(' - R$')[0];
+    const valorTotalAtual = parseFloat(textoLi.split(' - R$ ')[1].replace(',', '.'));
+    const valorUnitario = valorTotalAtual / (quantidade - 1);
+
+    const novoValorTotal = (valorUnitario * quantidade).toFixed(2).replace('.', ',');
+    liProduto.textContent = `${nomeProduto} - R$ ${novoValorTotal}`;
+  }
 }
 
 
