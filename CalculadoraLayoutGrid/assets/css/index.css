@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(45deg, #80d0ff, #001aff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+main {
+    background-color: #051f46;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 1.5);
+    width: auto;
+    padding: 15px 10px;
+}
+
+.display {
+    justify-content: center;
+    display: flex;   
+}
+
+.display input {
+    width: 100%;
+    height: 50px;
+    text-align: right;
+    padding: 10px;
+    font-size: 25px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.display input:focus {
+    outline: none;
+    border-color: #93d5fc;
+}
+
+.grid-container {
+    background-color: #0e2d5c;
+    display: grid;
+    padding: 10px;
+    gap: 10px;
+    justify-items: center;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-container button {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 25px;
+    width: 100%;
+    height: 100%;
+}
+
+.grid-container button:hover {
+    background-color: #93b9ff;
+}
+
+.btn-zero {
+    grid-column: span 2;
+}
+
+.btn-igual {
+    grid-row: span 2;
+}
+
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <title>Calculadora Grid Layout</title>
+</head>
+<body>
+    <main>
+        <div class="display">
+            <input type="text" id="display" placeholder="0" readonly>
+        </div>
+        <div class="grid-container">
+            <button class="btn" data-type="limpar">C</button>
+            <button class="btn" data-type="deletar">Del</button>
+            <button class="btn" data-type="operador" data-value="/">/</button>
+            <button class="btn" data-type="operador" data-value="*">x</button>
+            <button class="btn" data-type="numero" data-value="7">7</button>
+            <button class="btn" data-type="numero" data-value="8">8</button>
+            <button class="btn" data-type="numero" data-value="9">9</button>
+            <button class="btn" data-type="operador" data-value="-">-</button>
+            <button class="btn" data-type="numero" data-value="4">4</button>
+            <button class="btn" data-type="numero" data-value="5">5</button>
+            <button class="btn" data-type="numero" data-value="6">6</button>
+            <button class="btn" data-type="operador" data-value="+">+</button>
+            <button class="btn" data-type="numero" data-value="1">1</button>
+            <button class="btn" data-type="numero" data-value="2">2</button>
+            <button class="btn" data-type="numero" data-value="3">3</button>
+            <button class="btn-igual" data-type="igual">=</button>
+            <button class="btn-zero" data-type="numero" data-value="0">0</button>
+            <button class="btn" data-type="decimal" data-value=".">.</button>
+        </div>
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
