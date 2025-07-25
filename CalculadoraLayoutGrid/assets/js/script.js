@@ -17,9 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if(type === 'deletar') {
-            const comprimentoInputDisplay = inputDisplay.value.length;
-            alert(inputDisplay.value.slice());
-            // inputDisplay.value = inputDisplay.value.slice(-1);
+            const armazenaValorInputDisplay =  inputDisplay.value;
+            let armazenaTxt = "";
+
+            for(let i = 0; i < armazenaValorInputDisplay.length - 1; i++) {
+                armazenaTxt += armazenaValorInputDisplay[i];
+            }
+            inputDisplay.value = armazenaTxt;
         }
 
         if (type === 'numero') {
@@ -29,15 +33,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (type === 'decimal') {
             const armazenaTxtInputDisplay = inputDisplay.value;
+            let ultimoNumeroValido = '';
             let temPonto = false;
+    
             for(let i = 0; i < armazenaTxtInputDisplay.length; i++) {
                 if(armazenaTxtInputDisplay[i] === '.') {
                     temPonto = true;
                     break;
-                } 
+                }
+                ultimoNumeroValido = armazenaTxtInputDisplay[armazenaTxtInputDisplay.length - 1];
             }
-
+            
             if(temPonto === false) {
+                if(typeof parseFloat(ultimoNumeroValido) !== 'number' || ultimoNumeroValido === '') {
+                    return;
+                }
                 inputDisplay.value += value;
             }
         }
@@ -50,10 +60,18 @@ document.addEventListener("DOMContentLoaded", () => {
             isOperador = true;
         }
 
-        // 55*2+3/4
         if(type === 'igual') {
-            let partes = inputDisplay.value.split('*');
-            alert(partes);
+            const armazenaInput = inputDisplay.value;
+            const operadores = ['*', '/', '+', '-'];
+            let arrayResult = [];
+            let aux = '';
+            //5*55
+
+            for(let i = 0; i < armazenaInput.length; i++) {
+                if(!operadores.includes(armazenaInput[i])) {
+                    
+                }
+            }
         }
     });
 });
