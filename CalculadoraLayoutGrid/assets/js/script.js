@@ -1,6 +1,8 @@
+const gridContainer = document.querySelector('.grid-container');
+const inputDisplay = document.getElementById('display');
+const armazenaTxtInputDisplay = 
+
 document.addEventListener("DOMContentLoaded", () => {
-    const gridContainer = document.querySelector('.grid-container');
-    const inputDisplay = document.getElementById('display');
     gridContainer.addEventListener('click', (event) => {
         const click = event.target;
 
@@ -12,18 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const value = click.dataset.value;
         
         if(type === 'limpar') {
-            inputDisplay.value = '';
-            return;
+            limparInput();
         }
 
         if(type === 'deletar') {
-            const armazenaValorInputDisplay =  inputDisplay.value;
-            let armazenaTxt = "";
-
-            for(let i = 0; i < armazenaValorInputDisplay.length - 1; i++) {
-                armazenaTxt += armazenaValorInputDisplay[i];
-            }
-            inputDisplay.value = armazenaTxt;
+            deletarUltimoChar();
         }
 
         if (type === 'numero') {
@@ -32,24 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (type === 'decimal') {
-            const armazenaTxtInputDisplay = inputDisplay.value;
-            let ultimoNumeroValido = '';
-            let temPonto = false;
-    
-            for(let i = 0; i < armazenaTxtInputDisplay.length; i++) {
-                if(armazenaTxtInputDisplay[i] === '.') {
-                    temPonto = true;
-                    break;
-                }
-                ultimoNumeroValido = armazenaTxtInputDisplay[armazenaTxtInputDisplay.length - 1];
-            }
-            
-            if(temPonto === false) {
-                if(typeof parseFloat(ultimoNumeroValido) !== 'number' || ultimoNumeroValido === '') {
-                    return;
-                }
-                inputDisplay.value += value;
-            }
+            adicionaDecimal();
         }
         
         if(type === 'operador' && isOperador === false) {
@@ -61,18 +39,142 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if(type === 'igual') {
-            const armazenaInput = inputDisplay.value;
-            const operadores = ['*', '/', '+', '-'];
-            let arrayResult = [];
-            let aux = '';
-            //5*55
-
-            for(let i = 0; i < armazenaInput.length; i++) {
-                if(!operadores.includes(armazenaInput[i])) {
-                    
-                }
-            }
+            realizaCalculoTotal();
         }
     });
 });
 
+function limparInput() {
+    inputDisplay.value = '';
+}
+
+function deletarUltimoChar() {
+    const armazenaValorInputDisplay =  inputDisplay.value;
+    let armazenaTxt = "";
+
+    for(let i = 0; i < armazenaValorInputDisplay.length - 1; i++) {
+        armazenaTxt += armazenaValorInputDisplay[i];
+    }
+    inputDisplay.value = armazenaTxt;
+}
+
+function adicionaDecimal() {
+    const armazenaTxtInputDisplay = inputDisplay.value;
+    
+    let ultimoNumero = armazenaTxtInputDisplay.split(/\+|-|\*|\//).pop();
+    
+    if (ultimoNumero.includes('.')) {
+        return;
+    }
+    
+    if (ultimoNumero === '') {
+        return;
+    }
+    
+    inputDisplay.value += '.';
+}
+
+function realizaCalculoTotal() {
+    const armazenaInput = inputDisplay.value;
+    const operadores = ['*', '/', '+', '-'];
+    
+    let arrayResult = [];
+    let aux = '';
+
+    for(let i = 0; i < armazenaInput.length; i++) {
+        if(!operadores.includes(armazenaInput[i])) {
+            aux += armazenaInput[i];
+        } else {
+            if(!isNaN(aux) || aux.trim() !== '') {
+                arrayResult.push(aux);
+                aux = '';
+                arrayResult.push(armazenaInput[i]);
+            }
+        }
+    }   
+
+    if(aux.trim() !== '') {
+        arrayResult.push(aux);
+    }
+
+    while(arrayResult.includes('*')) {        
+        for(let i = 0; i < arrayResult.length; i++) {
+            if(arrayResult[i] === '*') {
+                const antecessor = arrayResult[i - 1];
+                const sucessor = arrayResult[i + 1];
+                let resultadoOperacao;
+
+                if (antecessor === null || antecessor === '' || sucessor === null || sucessor === '') {
+                    return;
+                }
+                
+                resultadoOperacao = parseFloat(antecessor) * parseFloat(sucessor);
+
+                arrayResult.splice(i - 1, 3, resultadoOperacao);
+            }
+        }
+    }
+
+    while(arrayResult.includes('/')) {
+        for(let i = 0; i < arrayResult.length; i++) {
+            if(arrayResult[i] === '/') {
+                
+                const antecessor = arrayResult[i - 1];
+                const sucessor = arrayResult[i + 1];
+                let resultadoOperacao;
+
+                if (antecessor === null || antecessor === '' || sucessor === null || sucessor === '') {
+                    return;
+                }
+                
+                resultadoOperacao = parseFloat(antecessor) / parseFloat(sucessor);
+
+                arrayResult.splice(i - 1, 3, resultadoOperacao);
+            }
+        }
+    }
+
+    while(arrayResult.includes('+')) {
+        for(let i = 0; i < arrayResult.length; i++) {
+            if(arrayResult[i] === '+') {
+                
+                const antecessor = arrayResult[i - 1];
+                const sucessor = arrayResult[i + 1];
+                let resultadoOperacao;
+
+                if (antecessor === null || antecessor === '' || sucessor === null || sucessor === '') {
+                    return;
+                }
+                
+                resultadoOperacao = parseFloat(antecessor) + parseFloat(sucessor);
+
+                arrayResult.splice(i - 1, 3, resultadoOperacao);
+            }
+        }
+    }
+    while(arrayResult.includes('-')) {
+        for(let i = 0; i < arrayResult.length; i++) {
+            if(arrayResult[i] === '-') {
+                
+                const antecessor = arrayResult[i - 1];
+                const sucessor = arrayResult[i + 1];
+                let resultadoOperacao;
+
+                if (antecessor === null || antecessor === '' || sucessor === null || sucessor === '') {
+                    return;
+                }
+                
+                resultadoOperacao = parseFloat(antecessor) - parseFloat(sucessor);
+
+                arrayResult.splice(i - 1, 3, resultadoOperacao);
+            }
+        }
+    }
+
+    inputDisplay.value = arrayResult[0];
+}
+
+function realizarCalculosOrdenadamente(array, operador) {
+    
+
+}
